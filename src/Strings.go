@@ -4,7 +4,20 @@ import (
 	"strings"
 )
 
-// removeAccents remove acentos de caracteres em português brasileiro
+func monthName(month int) string {
+
+	if month < 1 || month > 12 {
+		return "Mês inválido"
+	}
+
+	months := []string{
+		"Janeiro", "Fevereiro", "Março", "Abril",
+		"Maio", "Junho", "Julho", "Agosto",
+		"Setembro", "Outubro", "Novembro", "Dezembro",
+	}
+	return months[month-1]
+}
+
 func removeAccents(s string) string {
 	accentMap := map[rune]rune{
 		'á': 'a', 'à': 'a', 'ã': 'a', 'â': 'a',
@@ -30,7 +43,7 @@ func removeAccents(s string) string {
 	return string(runes)
 }
 
-func isPalindrome(s string) bool {
+func isPalindromeString(s string) bool {
 
 	s = strings.ReplaceAll(s, " ", "")
 	s = strings.ToLower(s)
@@ -44,6 +57,7 @@ func isPalindrome(s string) bool {
 	}
 	return true
 }
+
 func reverseString1(s string) string {
 	r := []rune(s)
 	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {

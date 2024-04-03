@@ -3,28 +3,45 @@ package main
 import (
 	"fmt"
 	_ "fmt"
-	"math"
+	"strconv"
 )
 
-func ehPrimo(num int) bool {
-	if num <= 1 {
-		return false
-	}
-	if num == 2 || num == 3 {
-		return true
-	}
-	if num%2 == 0 {
-		return false
-	}
-	for i := 3; i <= int(math.Sqrt(float64(num))); i += 2 {
-		if num%i == 0 {
-			return false
-		}
-	}
-	return true
-}
-
 func main() {
+
+	var isPalindromeNum int
+
+	fmt.Println("Digite um número para verificar se é palíndromo:")
+	_, err := fmt.Scan(&isPalindromeNum)
+	if err != nil {
+		fmt.Println("Erro: entrada inválida. Por favor, digite um número.")
+		return
+	}
+
+	if isPalindromeNumber(isPalindromeNum) {
+		fmt.Println("O número", isPalindromeNum, "é palíndromo.")
+	} else {
+		fmt.Println("O número", isPalindromeNum, "não é palíndromo.")
+	}
+
+	var mesStr string
+	var mes int
+	for {
+		fmt.Println("Digite um número de 1 a 12:")
+		_, err := fmt.Scan(&mesStr)
+		if err != nil {
+			fmt.Println("Erro: entrada inválida. Por favor, digite um número.")
+			continue
+		}
+
+		mes, err = strconv.Atoi(mesStr) // Atribuição direta à variável dexterna 'mes'
+		if err != nil {
+			fmt.Println("Erro: entrada inválida. Por favor, digite um número.")
+			continue
+		}
+
+		break
+	}
+	fmt.Println("O mês correspondente ao número", mes, "é", monthName(mes))
 
 	phrases := []string{
 		"arara",
@@ -37,7 +54,7 @@ func main() {
 	}
 
 	for _, phrase := range phrases {
-		fmt.Printf("\"%s\" é um palíndromo? %t\n", phrase, isPalindrome(phrase))
+		fmt.Printf("\"%s\" é um palíndromo? %t\n", phrase, isPalindromeString(phrase))
 	}
 
 	var vector = []int{1, 2, 3, 4, 5}
@@ -79,7 +96,7 @@ func main() {
 	}
 
 	for _, num := range numeros {
-		if ehPrimo(num) {
+		if isPrime(num) {
 			primos = append(primos, num)
 		}
 	}
