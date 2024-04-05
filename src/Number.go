@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"math"
+	"math/big"
+)
 
 func isPrime(num int) bool {
 	if num <= 1 {
@@ -36,4 +39,30 @@ func reverseNumber(num int) int {
 		num = num / 10
 	}
 	return reversed
+}
+
+func fatorial1(num int64) *big.Int {
+	if num == 0 {
+		return big.NewInt(1)
+	}
+	if num == 1 {
+		return big.NewInt(1)
+	}
+
+	bigNum := big.NewInt(num)
+	return bigNum.Mul(bigNum, fatorial1(num-1))
+}
+
+func fatorial2(num int64) *big.Int {
+	if num == 0 {
+		return big.NewInt(1)
+	}
+	if num == 1 {
+		return big.NewInt(1)
+	}
+	fat := big.NewInt(1)
+	for i := int64(2); i <= num; i++ {
+		fat.Mul(fat, big.NewInt(i))
+	}
+	return fat
 }

@@ -8,6 +8,17 @@ import (
 
 func main() {
 
+	fmt.Println("Digite um numero para encontrar seu fatorial:")
+	var numFat int64
+	_, errror := fmt.Scan(&numFat)
+	if errror != nil {
+		fmt.Println("Erro: entrada inválida. Por favor, digite um número.")
+		return
+	}
+
+	fmt.Println("Fatorial de", numFat, "é", fatorial1(numFat), "usando fatorial1")
+	fmt.Println("Fatorial de", numFat, "é", fatorial2(numFat), "usando fatorial2")
+
 	var isPalindromeNum int
 
 	fmt.Println("Digite um número para verificar se é palíndromo:")
