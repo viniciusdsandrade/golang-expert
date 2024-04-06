@@ -5,6 +5,51 @@ import (
 	"math/big"
 )
 
+func allDivisors(num int) []int {
+	if num == 0 {
+		return []int{}
+	}
+
+	var divisors []int
+	for i := 1; i <= num; i++ {
+		if num%i == 0 {
+			divisors = append(divisors, i, -i)
+		}
+	}
+	return divisors
+}
+
+func numDivisors(num int) int {
+	if num == 0 {
+		return 0
+	}
+
+	divisors := 0
+	for i := 1; i <= num; i++ {
+		if num%i == 0 {
+			divisors += 2
+		}
+	}
+	return divisors
+}
+
+func quantityOfDigits(num int) int {
+	if num == 0 {
+		return 1
+	}
+	if num < 0 {
+		num = -num
+	}
+
+	digits := 0
+	for num > 0 {
+		num = num / 10
+		digits++
+	}
+
+	return digits
+}
+
 func isPrime(num int) bool {
 	if num <= 1 {
 		return false

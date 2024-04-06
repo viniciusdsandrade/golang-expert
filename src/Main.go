@@ -8,6 +8,27 @@ import (
 
 func main() {
 
+	fmt.Print("Digite um número: ")
+	var num int
+	_, err := fmt.Scan(&num)
+	if err != nil {
+		fmt.Println("Erro: entrada inválida. Por favor, digite um número.")
+		return
+	}
+
+	fmt.Println("Quantidade de divisores de", num, ":", numDivisors(num))
+	fmt.Println("Divisores de", num, ":", allDivisors(num))
+
+	fmt.Print("Digite um número para verificar a quantidade de dígitos: ")
+	var numerinho int
+	_, err = fmt.Scan(&numerinho)
+	if err != nil {
+		fmt.Println("Erro: entrada inválida. Por favor, digite um número.")
+		return
+	}
+
+	fmt.Println("O número", numerinho, "possui", quantityOfDigits(numerinho), "dígitos.")
+
 	fmt.Println("Digite um numero para encontrar seu fatorial:")
 	var numFat int64
 	_, errror := fmt.Scan(&numFat)
@@ -22,7 +43,7 @@ func main() {
 	var isPalindromeNum int
 
 	fmt.Println("Digite um número para verificar se é palíndromo:")
-	_, err := fmt.Scan(&isPalindromeNum)
+	_, err = fmt.Scan(&isPalindromeNum)
 	if err != nil {
 		fmt.Println("Erro: entrada inválida. Por favor, digite um número.")
 		return
