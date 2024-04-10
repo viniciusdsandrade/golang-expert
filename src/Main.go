@@ -3,14 +3,59 @@ package main
 import (
 	"fmt"
 	_ "fmt"
+	"net/http"
 	"strconv"
 )
 
+func home(w http.ResponseWriter, _ *http.Request) {
+	_, err := w.Write([]byte("Hello, World!"))
+	if err != nil {
+		http.Error(w, "Unable to write response", http.StatusInternalServerError)
+	}
+}
+
 func main() {
+
+	p := Person{
+		FirstName: "Vinícius",
+		LastName:  "Andrade",
+		YearBorn:  2001,
+	}
+
+	fmt.Println(p.ToString())
+	fmt.Println("Nome: 		", p.FullName())
+	fmt.Println("Age: 		", p.Age())
+	fmt.Println("HashCode:	", p.HashCode())
+
+	pCopy, err := p.Clone()
+
+	if err != nil {
+		fmt.Println("Erro ao copiar p:", err)
+		return
+	}
+
+	isEqual := p.Equals(*pCopy)
+	fmt.Println("p é igual a pCopy?", isEqual)
+
+	fmt.Println(pCopy.ToString())
+	fmt.Println("Nome: 		", pCopy.FullName())
+	fmt.Println("Age: 		", pCopy.HashCode())
+	fmt.Println("HashCode:	", pCopy.Age())
+
+	http.HandleFunc("/", home)
+	err = http.ListenAndServe(":8080", nil)
+	if err != nil {
+		fmt.Printf("Server failed to start: %v", err)
+	}
+
+	resultant, status := somaAndBool(10, 20)
+
+	fmt.Println("Resultant:", resultant)
+	fmt.Println("Status:", status)
 
 	fmt.Print("Digite um número: ")
 	var num int
-	_, err := fmt.Scan(&num)
+	_, err = fmt.Scan(&num)
 	if err != nil {
 		fmt.Println("Erro: entrada inválida. Por favor, digite um número.")
 		return
