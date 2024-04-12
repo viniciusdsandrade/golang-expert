@@ -8,9 +8,9 @@ import (
 )
 
 type Person struct {
-	FirstName string
-	LastName  string
-	YearBorn  int
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	YearBorn  int    `json:"year_born"`
 }
 
 func (p Person) FullName() string {

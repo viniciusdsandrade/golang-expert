@@ -1,26 +1,52 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	_ "fmt"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 func home(w http.ResponseWriter, _ *http.Request) {
-	_, err := w.Write([]byte("Hello, World!"))
+	person := Person{
+		FirstName: "Vinícius",
+		LastName:  "Andrade",
+		YearBorn:  2001,
+	}
+
+	err := json.NewEncoder(w).Encode(person)
 	if err != nil {
-		http.Error(w, "Unable to write response", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+}
+
+func counter() {
+	for i := 0; i < 10; i++ {
+		fmt.Println(i)
+		time.Sleep(time.Second)
 	}
 }
 
 func main() {
+
+	// go routine -> cria uma nova thread (muito leve)
+	go counter()
+	go counter()
+	counter()
 
 	p := Person{
 		FirstName: "Vinícius",
 		LastName:  "Andrade",
 		YearBorn:  2001,
 	}
+
+	fmt.Println("FirstName: ", p.FirstName)
+	fmt.Println("LastName:  ", p.LastName)
+	fmt.Println("YearBorn:  ", p.YearBorn)
 
 	fmt.Println(p.ToString())
 	fmt.Println("Nome: 		", p.FullName())
