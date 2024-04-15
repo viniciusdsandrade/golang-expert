@@ -31,7 +31,24 @@ func counter() {
 	}
 }
 
+func worker(workerID int, data chan int) {
+	for x := range data {
+		fmt.Printf("Worker %d: %d\n", workerID, x)
+		time.Sleep(time.Second)
+	}
+}
+
 func main() {
+	// channel -> canal de comunicação entre go routines
+	channel := make(chan int)
+
+	for i := 1; i <= 100000; i++ {
+		go worker(i, channel)
+	}
+
+	for i := 1; i <= 100000; i++ {
+		channel <- i
+	}
 
 	stack := Constructor(5)
 	stack.Push(1)
