@@ -33,6 +33,15 @@ func counter() {
 
 func main() {
 
+	stack := Constructor(5)
+	stack.Push(1)
+	stack.Push(2)
+	stack.Push(3)
+	stack.Push(4)
+	stack.Push(5)
+
+	fmt.Println("stack.ToArray(): ", stack.ToArray())
+
 	// go routine -> cria uma nova thread (muito leve)
 	go counter()
 	go counter()
